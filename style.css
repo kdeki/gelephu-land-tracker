@@ -1,0 +1,413 @@
+/* Basic Resets & Body Styles */
+:root {
+    --primary-blue: #2c3e50; /* Dark blue for header, text */
+    --accent-green: #2ecc71; /* Green for completion/positive status */
+    --accent-yellow: #f1c40f; /* Yellow for attention/pending status */
+    --light-grey: #ecf0f1; /* Backgrounds */
+    --dark-grey-text: #34495e; /* General text */
+    --card-bg: #ffffff;
+    --border-color: #ddd;
+    --font-family: 'Arial', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.6;
+    color: var(--dark-grey-text);
+    background-color: var(--light-grey);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    color: var(--primary-blue);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Header/Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-blue);
+    padding: 15px 30px;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.navbar-logo {
+    height: 40px; /* Adjust height of logo */
+    margin-right: 15px;
+}
+
+.nav-links a {
+    color: white;
+    margin-left: 25px;
+    font-size: 1em;
+    padding: 5px 0;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--accent-yellow);
+    text-decoration: none;
+}
+
+.logout-btn {
+    background-color: #e74c3c; /* Red color for logout */
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #c0392b;
+    text-decoration: none;
+}
+
+.hamburger {
+    display: none; /* Hidden by default on larger screens */
+    font-size: 2em;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+/* Main Dashboard Layout */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* Quick Search */
+.quick-search {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    gap: 10px;
+}
+
+.quick-search input {
+    flex-grow: 1;
+    max-width: 500px;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.quick-search button {
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.quick-search button:hover {
+    background-color: #34495e;
+}
+
+/* Stats Cards */
+.stats-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.card h2 {
+    font-size: 1.2em;
+    color: var(--primary-blue);
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: var(--dark-grey-text);
+}
+
+.active-cases p { color: var(--primary-blue); }
+.completed-month p { color: var(--accent-green); }
+.avg-processing p { color: var(--accent-yellow); }
+
+
+/* Recent Activity & Cases Overview */
+.recent-activity-and-cases {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Activity on left, Cases on right */
+    gap: 25px;
+}
+
+.recent-activity, .all-cases-overview {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.recent-activity h2, .all-cases-overview h2 {
+    font-size: 1.4em;
+    color: var(--primary-blue);
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.recent-activity ul {
+    list-style: none;
+}
+
+.recent-activity li {
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--light-grey);
+    font-size: 0.95em;
+    color: #666;
+}
+
+.recent-activity li:last-child {
+    border-bottom: none;
+}
+
+/* Cases Table */
+.cases-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 0.9em;
+}
+
+.cases-table th, .cases-table td {
+    border: 1px solid var(--border-color);
+    padding: 10px 12px;
+    text-align: left;
+}
+
+.cases-table th {
+    background-color: var(--primary-blue);
+    color: white;
+    font-weight: bold;
+}
+
+.cases-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.cases-table tr:hover {
+    background-color: #f0f0f0;
+}
+
+/* Status Badges in Table */
+.status-doc-verified { background-color: #d4edda; color: #155724; padding: 4px 8px; border-radius: 4px; font-weight: bold; }
+.status-survey-scheduled { background-color: #fff3cd; color: #856404; padding: 4px 8px; border-radius: 4px; font-weight: bold; }
+.status-approval-pending { background-color: #cce5ff; color: #004085; padding: 4px 8px; border-radius: 4px; font-weight: bold; }
+.status-case-closed { background-color: #d6d8db; color: #383d41; padding: 4px 8px; border-radius: 4px; font-weight: bold; }
+
+.table-footer-note {
+    font-size: 0.85em;
+    color: #777;
+    margin-top: 15px;
+    text-align: right;
+}
+
+/* Footer Styles */
+.footer {
+    text-align: center;
+    padding: 25px;
+    margin-top: 50px;
+    background-color: var(--primary-blue);
+    color: white;
+    font-size: 0.9em;
+}
+
+.footer a {
+    color: var(--accent-yellow);
+}
+
+/* --- Responsive Design (Media Queries) --- */
+
+/* For Tablets and smaller desktops (max-width: 992px) */
+@media (max-width: 992px) {
+    .navbar {
+        padding: 15px 20px;
+    }
+    .navbar-brand {
+        font-size: 1.3em;
+    }
+    .nav-links a {
+        margin-left: 15px;
+    }
+    .dashboard-container {
+        margin: 20px auto;
+        padding: 0 15px;
+    }
+    .recent-activity-and-cases {
+        grid-template-columns: 1fr; /* Stack activity and cases vertically */
+    }
+}
+
+/* For Mobile Phones (max-width: 768px) */
+@media (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap; /* Allow items to wrap */
+        padding: 10px 15px;
+    }
+    .navbar-brand {
+        width: 100%; /* Brand takes full width */
+        justify-content: center; /* Center brand */
+        margin-bottom: 10px;
+        font-size: 1.2em;
+    }
+    .navbar-logo {
+        height: 35px;
+        margin-right: 10px;
+    }
+    .nav-links {
+        display: none; /* Hide navigation links by default */
+        flex-direction: column;
+        width: 100%;
+        background-color: #34495e; /* Darker background for mobile menu */
+        position: absolute; /* Position relative to viewport */
+        top: 70px; /* Adjust based on navbar height */
+        left: 0;
+        right: 0;
+        padding-bottom: 10px;
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    .nav-links.active {
+        display: flex; /* Show when active */
+    }
+    .nav-links a {
+        margin: 10px 0;
+        text-align: center;
+        padding: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .nav-links a:last-child {
+        border-bottom: none;
+    }
+    .hamburger {
+        display: block; /* Show hamburger icon */
+        order: 2; /* Position it to the right */
+        margin-left: auto; /* Push it to the right */
+    }
+    .logout-btn {
+        margin-top: 10px;
+        width: 80%; /* Make logout button wider */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .quick-search {
+        flex-direction: column; /* Stack search input and button */
+    }
+    .quick-search input, .quick-search button {
+        max-width: 100%; /* Allow full width */
+    }
+
+    .stats-cards {
+        grid-template-columns: 1fr; /* Stack cards vertically */
+    }
+
+    .cases-table {
+        overflow-x: auto; /* Enable horizontal scrolling for table */
+        display: block; /* Important for table scrolling on small screens */
+        white-space: nowrap; /* Prevent text wrapping in table */
+    }
+    .cases-table thead, .cases-table tbody, .cases-table th, .cases-table td, .cases-table tr {
+        display: block; /* Make table elements block for responsive stacking */
+    }
+    .cases-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    .cases-table td {
+        /* Behave like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%; /* Space for the label */
+        text-align: right;
+    }
+    .cases-table td:before {
+        /* Create the labels for mobile view */
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+        color: var(--primary-blue);
+    }
+
+    /* Assign data labels for each column */
+    .cases-table td:nth-of-type(1):before { content: "Case ID:"; }
+    .cases-table td:nth-of-type(2):before { content: "Applicant:"; }
+    .cases-table td:nth-of-type(3):before { content: "Service:"; }
+    .cases-table td:nth-of-type(4):before { content: "Date:"; }
+    .cases-table td:nth-of-type(5):before { content: "Status:"; }
+}
+
+/* Very Small Phones */
+@media (max-width: 480px) {
+    .navbar-brand span {
+        font-size: 0.9em; /* Smaller text for brand on very small screens */
+    }
+    .quick-search input {
+        padding: 10px;
+    }
+    .quick-search button {
+        padding: 10px 15px;
+    }
+    .card h2 {
+        font-size: 1.1em;
+    }
+    .card p {
+        font-size: 2em;
+    }
+    .recent-activity h2, .all-cases-overview h2 {
+        font-size: 1.2em;
+    }
+    .recent-activity li {
+        font-size: 0.9em;
+    }
+    .cases-table td {
+        padding-left: 45%; /* Adjust padding for labels */
+    }
+}

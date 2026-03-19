@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gelephu Land Services Tracker (GLST)</title>
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Link to your logo for the favicon -->
+    <link rel="icon" href="gelephu-logo.png" type="image/png">
+</head>
+<body>
+    <header class="navbar">
+        <div class="navbar-brand">
+            <img src="gelephu-logo.png" alt="Gelephu Land Services Logo" class="navbar-logo">
+            <span>Gelephu Land Services Tracker (GLST)</span>
+        </div>
+        <nav class="nav-links" id="navLinks">
+            <a href="#">Dashboard</a>
+            <a href="#">Case Management</a>
+            <a href="#">Settings</a>
+            <a href="#" class="logout-btn">Logout</a>
+        </nav>
+        <button class="hamburger" id="hamburger">☰</button>
+    </header>
+
+    <main class="dashboard-container">
+        <div class="quick-search">
+            <input type="text" placeholder="Quick Search: Enter Thram/Case ID/Name">
+            <button>Search</button>
+        </div>
+
+        <div class="stats-cards">
+            <div class="card active-cases">
+                <h2>Active Cases</h2>
+                <p>247</p>
+            </div>
+            <div class="card completed-month">
+                <h2>Completed This Month</h2>
+                <p>89</p>
+            </div>
+            <div class="card avg-processing">
+                <h2>Average Processing Time</h2>
+                <p>15 Days</p>
+            </div>
+        </div>
+
+        <div class="recent-activity-and-cases">
+            <div class="recent-activity">
+                <h2>Recent Activity Feed</h2>
+                <ul>
+                    <li>Case #2023-0158: Status updated to 'Site Survey Scheduled'</li>
+                    <li>Case #2563-416B: New Thram issued to T. Norbu.</li>
+                    <li>Case #2023-0158: Documents verified by P. Dema.</li>
+                    <li>Case #2023-0159: Approval Pending for Subdivision request.</li>
+                    <li>Case #2023-0160: Case Closed - Thram Handed Over to applicant.</li>
+                </ul>
+            </div>
+
+            <div class="all-cases-overview">
+                <h2>All Cases Overview</h2>
+                <table class="cases-table">
+                    <thead>
+                        <tr>
+                            <th>Case ID Number</th>
+                            <th>Applicant Name</th>
+                            <th>Service Type</th>
+                            <th>Date Submitted</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2023-0161</td>
+                            <td>Dechen Wangmo</td>
+                            <td>New Thram</td>
+                            <td>2023-10-26</td>
+                            <td class="status-doc-verified">Documents Verified</td>
+                        </tr>
+                        <tr>
+                            <td>2023-0158</td>
+                            <td>Pema Dorji</td>
+                            <td>Application Submitted</td>
+                            <td>2023-10-25</td>
+                            <td class="status-survey-scheduled">Survey Scheduled</td>
+                        </tr>
+                        <tr>
+                            <td>2023-0112</td>
+                            <td>Karma Gyeltshen</td>
+                            <td>Application Submitted</td>
+                            <td>2023-10-24</td>
+                            <td class="status-approval-pending">Approval Pending</td>
+                        </tr>
+                        <tr>
+                            <td>2023-0159</td>
+                            <td>Subba Dorji</td>
+                            <td>Site Survey Completed</td>
+                            <td>2023-10-23</td>
+                            <td class="status-approval-pending">Approval Pending</td>
+                        </tr>
+                        <tr>
+                            <td>2023-0160</td>
+                            <td>Jigme Norbu</td>
+                            <td>Case Closed</td>
+                            <td>2023-10-22</td>
+                            <td class="status-case-closed">Case Closed</td>
+                        </tr>
+                        <!-- More rows would be added here dynamically from a database -->
+                    </tbody>
+                </table>
+                <p class="table-footer-note">Note: This table displays sample data. Real data would be loaded from a database.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2023 Gelephu Land Services. All rights reserved.</p>
+        <p><a id="footer-url" href="https://yourusername.github.io/gelephu-land-tracker/">https://yourusername.github.io/gelephu-land-tracker/</a></p>
+    </footer>
+
+    <!-- Link to your JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
