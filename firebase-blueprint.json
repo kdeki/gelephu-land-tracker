@@ -1,0 +1,39 @@
+{
+  "entities": {
+    "Case": {
+      "title": "Case",
+      "description": "A land services case",
+      "type": "object",
+      "properties": {
+        "applicant": { "type": "string" },
+        "type": { "type": "string" },
+        "status": { "type": "string" },
+        "date": { "type": "string" },
+        "userId": { "type": "string" }
+      },
+      "required": ["applicant", "type", "status", "date", "userId"]
+    },
+    "Activity": {
+      "title": "Activity",
+      "description": "A recent activity feed item",
+      "type": "object",
+      "properties": {
+        "text": { "type": "string" },
+        "time": { "type": "string" },
+        "timestamp": { "type": "number" },
+        "userId": { "type": "string" }
+      },
+      "required": ["text", "time", "timestamp", "userId"]
+    }
+  },
+  "firestore": {
+    "/cases/{caseId}": {
+      "schema": { "$ref": "#/entities/Case" },
+      "description": "Collection of cases"
+    },
+    "/activities/{activityId}": {
+      "schema": { "$ref": "#/entities/Activity" },
+      "description": "Collection of recent activities"
+    }
+  }
+}

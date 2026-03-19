@@ -1,0 +1,101 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: cases
+    // Document ID: auto-generated
+    // Fields:
+    //   - applicant: string (required) - Name of the applicant
+    //   - type: string (required) - Type of case
+    //   - status: string (required) - Status of the case
+    //   - date: string (required) - Date filed
+    //   - userId: string (required) - ID of the user who created the case
+    //
+    // Collection: activities
+    // Document ID: auto-generated
+    // Fields:
+    //   - text: string (required) - Description of the activity
+    //   - time: string (required) - Time string (e.g., '2 hours ago')
+    //   - timestamp: number (required) - Unix timestamp for sorting
+    //   - userId: string (required) - ID of the user who created the activity
+    //
+    // ===============================================================
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isDocOwner() {
+      return isAuthenticated() && request.auth.uid == resource.data.userId;
+    }
+
+    function uidUnchanged() {
+      return !('userId' in request.resource.data) || request.resource.data.userId == request.auth.uid;
+    }
+
+    function uidNotModified() {
+      return !('userId' in request.resource.data) || request.resource.data.userId == resource.data.userId;
+    }
+
+    function hasRequiredFields(fields) {
+      return request.resource.data.keys().hasAll(fields);
+    }
+
+    function hasOnlyAllowedFields(fields) {
+      return request.resource.data.keys().hasOnly(fields);
+    }
+
+    function validStringLength(field, minLen, maxLen) {
+      return request.resource.data[field] is string &&
+        request.resource.data[field].size() >= minLen &&
+        request.resource.data[field].size() <= maxLen;
+    }
+
+    // Domain Validators
+    function isValidCase() {
+      return hasOnlyAllowedFields(['applicant', 'type', 'status', 'date', 'userId']) &&
+             validStringLength('applicant', 1, 100) &&
+             validStringLength('type', 1, 100) &&
+             validStringLength('status', 1, 50) &&
+             validStringLength('date', 1, 50) &&
+             request.resource.data.userId is string;
+    }
+
+    function isValidActivity() {
+      return hasOnlyAllowedFields(['text', 'time', 'timestamp', 'userId']) &&
+             validStringLength('text', 1, 500) &&
+             validStringLength('time', 1, 50) &&
+             request.resource.data.timestamp is number &&
+             request.resource.data.userId is string;
+    }
+
+    // ===============================================================
+    // Rules
+    // ===============================================================
+
+    match /cases/{caseId} {
+      allow read: if isDocOwner();
+      allow create: if isAuthenticated() && isValidCase() && uidUnchanged() && isOwner(request.resource.data.userId);
+      allow update: if isDocOwner() && isValidCase() && uidNotModified();
+      allow delete: if isDocOwner();
+    }
+
+    match /activities/{activityId} {
+      allow read: if isDocOwner();
+      allow create: if isAuthenticated() && isValidActivity() && uidUnchanged() && isOwner(request.resource.data.userId);
+      allow update: if isDocOwner() && isValidActivity() && uidNotModified();
+      allow delete: if isDocOwner();
+    }
+  }
+}
